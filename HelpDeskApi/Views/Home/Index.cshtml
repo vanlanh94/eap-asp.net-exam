@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Work item list";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //Call Work item list jsonResult Method
+        $.getJSON("../api/workitems",
+            function (json) {
+                var tr;
+                //Append each row to html table
+                for (var i = 0; i < json.length; i++) {
+                    tr = $('<tr/>');
+                    tr.append("<td>" + json[i].Id + "</td>");
+                    tr.append("<td>" + json[i].Title + "</td>");
+                    tr.append("<td>" + json[i].Status + "</td>");
+                    tr.append("<td>" + json[i].CreatedDate + "</td>");
+                    tr.append("<td>" + json[i].CompletedDate + "</td>");
+                    $('table').append(tr);
+                }
+            });
+    });
+</script>
+<table class="table table-bordered table-condensed table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>CreatedDate</th>
+            <th>CompletedDate</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+
+</table>
+
+<p>
+    @Html.ActionLink("Create New", "../HelpDesk/Create")
+</p>
